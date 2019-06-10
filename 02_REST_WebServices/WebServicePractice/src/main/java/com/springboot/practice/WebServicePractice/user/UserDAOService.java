@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component;
 public class UserDAOService {
 
 	private static List<User> users = new ArrayList<>();
-	
+	private static int userCount = 3; 
 	
 	static {
-		users.add(new User("1","Velmurugan","CSE"));
-		users.add(new User("2","Radhakrishnan","IT"));
-		users.add(new User("3","Munna","ECE"));
+		users.add(new User(1,"Velmurugan","CSE"));
+		users.add(new User(2,"Radhakrishnan","IT"));
+		users.add(new User(3,"Munna","ECE"));
 	}
 	
 	//GET /users
@@ -31,7 +31,7 @@ public class UserDAOService {
 	}
 	
 	//GET /users{id}
-	public User findUser(String id) {
+	public User findUser(int id) {
 		
 		for(User currentUser : users) {
 			if(currentUser.getId().equals(id)) {
@@ -41,4 +41,12 @@ public class UserDAOService {
 		return null;
 	}
 	
+	//CREATE 
+	
+	public void createUser(User user) {
+		if(user.getId() == null) {
+			user.setId(++userCount);
+		}
+		users.add(user);
+	}
 }

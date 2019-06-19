@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author JJPL278
  *
  */
 
-@Component
+@Service
 public class UserDAOService {
 
 	private static List<User> users = new ArrayList<>();

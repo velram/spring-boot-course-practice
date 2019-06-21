@@ -44,10 +44,11 @@ public class UserDAOService {
 	
 	//CREATE 
 	
-	public void createUser(User user) {
+	public User createUser(User user) {
 		if(user.getId() == null) {
 			user.setId(++userCount);
 		}
 		users.add(user);
+		return user;
 	}
 }

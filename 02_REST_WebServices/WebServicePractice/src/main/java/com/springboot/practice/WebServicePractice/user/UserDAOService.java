@@ -36,9 +36,12 @@ public class UserDAOService {
 		
 		for(User currentUser : users) {
 			if(currentUser.getId().equals(id)) {
+				
+				
 				return currentUser;
 			}
-		}
+		}		
+		
 		return null;
 	}
 	

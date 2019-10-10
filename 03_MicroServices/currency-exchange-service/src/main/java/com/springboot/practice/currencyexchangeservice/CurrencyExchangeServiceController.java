@@ -23,10 +23,15 @@ public class CurrencyExchangeServiceController {
 	@Autowired
 	private Environment environment;
 
+	@Autowired
+	private ExchangeValueRepository exchangeValueRepo;
+
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
 	public ExchangeValue fetchExchangeValue(@PathVariable String from, @PathVariable String to) {
-		ExchangeValue exchangeValue = new ExchangeValue(1000L, from, to, BigDecimal.valueOf(65));
+
+		ExchangeValue exchangeValue = exchangeValueRepo.findByFromAndTo(from, to);//new ExchangeValue(1000L, from, to, BigDecimal.valueOf(65));
 		exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+		System.out.print("exchangeValue : "+exchangeValue);
 		return exchangeValue;
 	}
 }

@@ -3,6 +3,9 @@
  */
 package com.springboot.practice.currencyexchangeservice;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
 
@@ -11,14 +14,28 @@ import java.math.BigDecimal;
  * 
  */
 
+@Entity
 public class ExchangeValue {
-  
+
+	@Id
 	private long id;
+
+	@Column(name = "exchange_from")
 	private String from;
+
+	@Column(name="exchange_to")
 	private String to;
+
 	private BigDecimal conversionMultiple;
 	private int port;
-	
+
+
+	/**
+	 * Default constructor
+	 */
+	public ExchangeValue(){
+
+	}
 	
 	public ExchangeValue(long pId, String pFrom, String pTo, BigDecimal pConversionMultiple) {
 		

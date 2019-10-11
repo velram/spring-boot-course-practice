@@ -2,7 +2,9 @@ package com.springboot.practice.currencyconversionservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
+@EnableFeignClients("com.springboot.practice.currencyconversionservice")
 @SpringBootApplication
 public class CurrencyConversionServiceApplication {
 

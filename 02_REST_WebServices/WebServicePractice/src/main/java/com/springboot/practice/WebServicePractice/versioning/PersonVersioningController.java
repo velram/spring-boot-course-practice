@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PersonVersioningController {
 
-    /*Approach #1 (versioning) - starts */
+    /*Approach #1 URI versioning - starts */
     @GetMapping("/person/v1")
     public PersonV1 fetchPersonV1(){
         return new PersonV1("Velmurugan", "Moorthy");
@@ -21,10 +21,10 @@ public class PersonVersioningController {
     public PersonV2 fetchPersonV2(){
         return new PersonV2(new Name("Velu", "Murugan"));
     }
-    /*Approach #1 (versioning) - ends */
+    /*Approach #1 URI versioning -  ends */
 
 
-    /*Approach #2 (versioning) - using path parameter starts */
+    /*Approach #2 - Paramater versioning - using path parameter - STARTS */
     @GetMapping(value = "/person/params", params = "version=1")
     public PersonV1 fetchPersonByPathParamV1(){
         return new PersonV1("Velmurugan", "Moorthy");
@@ -34,10 +34,10 @@ public class PersonVersioningController {
     public PersonV2 fetchPersonByPathParamV2(){
         return new PersonV2(new Name("Velu", "Murugan"));
     }
-    /*Approach #2 (versioning) - ends */
+    /*Approach #2 - Paramater versioning - ends */
 
 
-    /*Approach #3 (versioning) - starts
+    /*Approach #3 header versioning - starts
     * using headers (header versioning)
     * */
     @GetMapping(value = "/person/headers", headers = "X-API-VERSION=1")
@@ -53,9 +53,9 @@ public class PersonVersioningController {
 
     /*Approach #3 (versioning) - ends */
 
-    /*Approach #4 (versioning) - starts
+    /*Approach #4 - Media type versioning / MIME type versioning - starts
     * using "produces"
-    * Accept-header versioning / MIME type versioning / produces-type versioning
+    * Accept-header versioning / MIME type versioning / produces-type versioning / Media type versioning
     * */
 
     @GetMapping(value = "/person/headers", produces = "application/vnd.app-v1+json")

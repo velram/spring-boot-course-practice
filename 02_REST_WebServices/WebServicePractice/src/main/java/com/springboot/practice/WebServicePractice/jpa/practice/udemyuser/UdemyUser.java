@@ -1,4 +1,4 @@
-package com.springboot.practice.WebServicePractice.jpa.practice.entity;
+package com.springboot.practice.WebServicePractice.jpa.practice.udemyuser;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,12 @@ public class UdemyUser {
     private String userName;
     private String socialSecurityNumber;
 
-    public UdemyUser(String userName, String socialSecurityNumber) {
+    protected UdemyUser(){
+
+    }
+
+    public UdemyUser(String udemyId, String userName, String socialSecurityNumber) {
+        this.udemyId = udemyId;
         this.userName = userName;
         this.socialSecurityNumber = socialSecurityNumber;
     }

@@ -1,10 +1,12 @@
 package com.springboot.practice.WebServicePractice.jpa.practice.udemyuser;
 
-import org.hibernate.annotations.GenericGenerator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class UdemyUser {
@@ -16,6 +18,9 @@ public class UdemyUser {
 
     private String userName;
     private String socialSecurityNumber;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
     protected UdemyUser(){
 
@@ -49,5 +54,13 @@ public class UdemyUser {
 
     public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

@@ -47,4 +47,11 @@ public class UdemyUserJPAController {
         return ResponseEntity.created(createdUserURI).build();
     }
 
+    @GetMapping("/jpa/users/{id}/posts")
+    public List<Post> getPostsByUser(@PathVariable int id) throws UdemyUserNotFoundException {
+         List<Post> userPosts = udemyUserDaoService.findPostsByUser(id);
+        return userPosts;
+    }
+
+
 }

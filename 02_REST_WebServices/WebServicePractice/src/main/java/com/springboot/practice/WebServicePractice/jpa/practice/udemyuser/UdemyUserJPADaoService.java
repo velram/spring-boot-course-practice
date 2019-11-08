@@ -23,4 +23,14 @@ public class UdemyUserJPADaoService {
     public void deleteById(int pId) {
         udemyUserRepository.deleteById(pId);
     }
+
+    public List<Post> findPostsByUser(int pId) throws UdemyUserNotFoundException {
+        Optional<UdemyUser> userOptional = findUdemyUserById(pId);
+        if(!userOptional.isPresent()){
+            //return new UdemyUserNotFoundException("User is not found with id : "+pId);
+            throw new UdemyUserNotFoundException("User is not found with id : "+pId);
+        }
+
+        return userOptional.get().getPosts();
+    }
 }

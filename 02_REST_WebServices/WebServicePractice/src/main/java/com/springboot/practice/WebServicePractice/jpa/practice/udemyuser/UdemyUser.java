@@ -1,5 +1,7 @@
 package com.springboot.practice.WebServicePractice.jpa.practice.udemyuser;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,8 +10,9 @@ import javax.persistence.Id;
 public class UdemyUser {
 
     @Id
-    @GeneratedValue
-    private String udemyId;
+    @GeneratedValue//(generator="system-uuid")
+    //@GenericGenerator(name="system-uuid", strategy = "uuid") // To generate id as string
+    private Integer udemyId;
 
     private String userName;
     private String socialSecurityNumber;
@@ -18,17 +21,17 @@ public class UdemyUser {
 
     }
 
-    public UdemyUser(String udemyId, String userName, String socialSecurityNumber) {
-        this.udemyId = udemyId;
+    public UdemyUser(String userName, String socialSecurityNumber) {
+
         this.userName = userName;
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    public String getUdemyId() {
+    public Integer getUdemyId() {
         return udemyId;
     }
 
-    public void setUdemyId(String udemyId) {
+    public void setUdemyId(Integer udemyId) {
         this.udemyId = udemyId;
     }
 

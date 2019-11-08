@@ -1,10 +1,11 @@
 package com.springboot.practice.WebServicePractice.jpa.practice.udemyuser;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,9 @@ public class UdemyUserJPAController {
     @Autowired
     private UdemyUserJPADaoService udemyUserDaoService;
 
+    @Autowired
+    private UdemyUserJPARepository udemyUserRepository;
+
     @GetMapping("/jpa/users")
     public List<UdemyUser> retrieveAllUdemyUsers(){
         return udemyUserDaoService.findAllUdemyUsers();
@@ -21,13 +25,26 @@ public class UdemyUserJPAController {
 
     @GetMapping("/jpa/users/{id}")
     public UdemyUser retrieveAllUdemyUsers(
-            @PathVariable int pId){
+            @PathVariable int id){
 
-        Optional<UdemyUser> result = udemyUserDaoService.findUdemyUserById(String.valueOf(pId));
+        Optional<UdemyUser> result = udemyUserDaoService.findUdemyUserById(id);
         if(!result.isPresent()){
             return null;
         }
         return result.get();
+    }
+
+    @DeleteMapping("/jpa/users/{id}")
+    public void deleteUser(@PathVariable int id){
+        udemyUserDaoService.deleteById(id);
+    }
+
+    @PostMapping("/jpa/users/create")
+    public ResponseEntity<Object> createUser(@RequestBody UdemyUser pUdemyUser){
+
+        UdemyUser createdUser = udemyUserRepository.save(pUdemyUser);
+        URI createdUserURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdUser.getUdemyId()).toUri();
+        return ResponseEntity.created(createdUserURI).build();
     }
 
 }

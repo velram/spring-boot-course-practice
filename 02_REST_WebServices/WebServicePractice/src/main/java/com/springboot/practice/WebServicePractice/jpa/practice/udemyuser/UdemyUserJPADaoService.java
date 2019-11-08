@@ -16,7 +16,11 @@ public class UdemyUserJPADaoService {
         return udemyUserRepository.findAll();
     }
 
-    public Optional<UdemyUser> findUdemyUserById(String pId){
+    public Optional<UdemyUser> findUdemyUserById(int pId){
         return udemyUserRepository.findById(pId);
+    }
+
+    public void deleteById(int pId) {
+        udemyUserRepository.deleteById(pId);
     }
 }

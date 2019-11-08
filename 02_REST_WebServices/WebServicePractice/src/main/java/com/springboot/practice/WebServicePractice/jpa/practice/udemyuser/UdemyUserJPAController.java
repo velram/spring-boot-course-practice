@@ -18,6 +18,9 @@ public class UdemyUserJPAController {
     @Autowired
     private UdemyUserJPARepository udemyUserRepository;
 
+    @Autowired
+    private PostRepository postRepository;
+
     @GetMapping("/jpa/users")
     public List<UdemyUser> retrieveAllUdemyUsers(){
         return udemyUserDaoService.findAllUdemyUsers();
@@ -53,5 +56,18 @@ public class UdemyUserJPAController {
         return userPosts;
     }
 
+
+    @PostMapping("/jpa/users/{id}/posts")
+    public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Post post) throws UdemyUserNotFoundException {
+        Optional<UdemyUser> userOptional = udemyUserDaoService.findUdemyUserById(id);
+        if(!userOptional.isPresent()){
+            throw new UdemyUserNotFoundException("User is not found with id : "+id);
+        }
+        UdemyUser user = userOptional.get();
+        post.setUser(user);
+        postRepository.save(post);
+        URI postUri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getId()).toUri();
+        return ResponseEntity.created(postUri).build();
+    }
 
 }
